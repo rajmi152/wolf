@@ -90,7 +90,7 @@
 </head>
 <body class="min-h-screen relative flex flex-col justify-between selection:bg-red-500 selection:text-black">
 
-    <!-- Zenelejátszó a te MP3 daledre kötve -->
+    <!-- Zenelejátszó -->
     <audio id="bg-audio" loop preload="auto">
         <source src="https://rajmi152.github.io/wolf/T%C3%B6r%C3%B6m%2520a%2520l%C3%A1ncot.mp3" type="audio/mp3">
     </audio>
@@ -98,8 +98,9 @@
     <div class="fixed inset-0 grid-bg pointer-events-none z-0"></div>
     <div class="fixed -top-40 -left-40 w-96 h-96 rounded-full blur-[120px] pointer-events-none z-0 opacity-30" style="background-color: var(--accent-color);"></div>
 
-    <nav class="sticky top-0 z-40 glass-panel border-b border-white/10 px-6 py-3">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
+    <!-- Navigáció -->
+    <nav class="sticky top-0 z-40 glass-panel border-b border-white/10 px-6 py-3 w-full">
+        <div class="max-w-6xl mx-auto flex justify-between items-center w-full">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-xl bg-accent flex items-center justify-center font-orbitron font-bold text-lg text-black shadow-lg">
                     <i class="fa-solid fa-gamepad"></i>
@@ -129,11 +130,160 @@
         </div>
     </nav>
 
+    <!-- Fő tartalom -->
     <main class="relative z-10 max-w-6xl mx-auto px-4 py-8 w-full space-y-8 flex-grow">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
             <div class="glass-panel rounded-3xl p-6 text-center flex flex-col items-center gap-4 relative overflow-hidden shadow-xl">
                 <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
                 <div class="relative w-32 h-32 rounded-2xl overflow-hidden bg-slate-900 border-2 border-white/20 shadow-lg">
                     <img id="avatar-img" src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&auto=format&fit=crop&q=80" alt="Avatar" class="w-full h-full object-cover">
                 </div>
-                <div class="space-y-
+                <div class="space-y-1">
+                    <h1 id="creator-name" class="font-orbitron font-black text-2xl tracking-wide uppercase text-white">WOLF GAMING</h1>
+                    <p id="creator-bio" class="text-gray-300 text-xs leading-relaxed">
+                        Üdvözöllek a csatornámon! Napi szintű livestream-ek, gaming videók és közösség.
+                    </p>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 flex flex-col justify-between space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <a id="link-youtube" href="https://youtube.com" target="_blank" class="glass-panel p-5 rounded-2xl border border-red-500/20 hover:border-red-500/60 flex items-center gap-4 transition-all group shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-red-600/20 border border-red-500/40 flex items-center justify-center text-red-500 text-xl group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-youtube"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron font-bold text-sm text-white group-hover:text-red-400">YouTube Csatorna</h3>
+                            <p class="text-xs text-gray-400">Videók és élők</p>
+                        </div>
+                    </a>
+
+                    <a id="link-discord" href="https://discord.com" target="_blank" class="glass-panel p-5 rounded-2xl border border-indigo-500/20 hover:border-indigo-500/60 flex items-center gap-4 transition-all group shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-600/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400 text-xl group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-discord"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron font-bold text-sm text-white group-hover:text-indigo-300">Discord Szerver</h3>
+                            <p class="text-xs text-gray-400">Lépj be a közösségbe</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="glass-panel rounded-2xl p-4 flex flex-wrap justify-around gap-2 text-xs font-semibold">
+                    <a href="https://twitch.tv" target="_blank" class="text-gray-300 hover:text-purple-400 transition-colors px-3 py-1 rounded-lg hover:bg-white/5"><i class="fa-brands fa-twitch text-purple-400"></i> Twitch</a>
+                    <a href="https://tiktok.com" target="_blank" class="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-1 rounded-lg hover:bg-white/5"><i class="fa-brands fa-tiktok text-cyan-400"></i> TikTok</a>
+                    <a href="https://facebook.com" target="_blank" class="text-gray-300 hover:text-blue-400 transition-colors px-3 py-1 rounded-lg hover:bg-white/5"><i class="fa-brands fa-facebook text-blue-400"></i> Facebook</a>
+                    <a href="https://instagram.com" target="_blank" class="text-gray-300 hover:text-pink-400 transition-colors px-3 py-1 rounded-lg hover:bg-white/5"><i class="fa-brands fa-instagram text-pink-400"></i> Instagram</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full">
+            <div class="lg:col-span-2 space-y-3">
+                <h2 class="font-orbitron font-bold text-base text-white flex items-center gap-2">
+                    <i class="fa-solid fa-play text-accent"></i> Legújabb Videó / Stream
+                </h2>
+                <div class="glass-panel rounded-3xl p-3 shadow-2xl">
+                    <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-black">
+                        <iframe class="w-full h-full border-0" 
+                                src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" 
+                                title="Featured Video" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <h2 class="font-orbitron font-bold text-base text-white flex items-center gap-2">
+                    <i class="fa-solid fa-calendar-days text-accent"></i> Stream Menetrend
+                </h2>
+                <div class="glass-panel rounded-3xl p-6 space-y-4 shadow-xl">
+                    <div class="border-b border-white/10 pb-3">
+                        <div class="flex justify-between font-orbitron font-bold text-sm text-accent">
+                            <span>Hétfő - Szerda</span>
+                            <span>18:00</span>
+                        </div>
+                        <p class="text-gray-400 text-xs mt-1">GTA V Roleplay / Gaming</p>
+                    </div>
+                    <div class="border-b border-white/10 pb-3">
+                        <div class="flex justify-between font-orbitron font-bold text-sm text-accent">
+                            <span>Péntek</span>
+                            <span>19:00</span>
+                        </div>
+                        <p class="text-gray-400 text-xs mt-1">Közösségi Est & Játékok</p>
+                    </div>
+                    <div class="p-3 rounded-xl bg-accent/10 border border-accent/20">
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            <i class="fa-solid fa-bullhorn text-accent"></i> Hamarosan indul a Discord nyereményjáték! Csatlakozz a szerverre!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Lábléc -->
+    <footer class="relative z-10 border-t border-white/10 bg-black/40 py-6 text-center text-xs text-gray-500 w-full">
+        <p>© <span id="year"></span> <span id="footer-name">WOLF GAMING</span>. Minden jog fenntartva.</p>
+    </footer>
+
+    <!-- Modál -->
+    <div id="customizer-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+        <div class="glass-panel w-full max-w-md rounded-3xl p-6 space-y-4 border border-white/20 shadow-2xl text-center">
+            <h3 class="font-orbitron font-bold text-base text-white flex items-center justify-center gap-2">
+                <i class="fa-solid fa-music text-accent"></i> Háttérzene Info
+            </h3>
+            <p class="text-xs text-gray-300 leading-relaxed">
+                A zenéd (<span class="text-accent font-bold">Töröm a láncot.mp3</span>) csatolva van és automatikusan indul!
+            </p>
+            <button id="close-customizer-btn" class="w-full bg-accent text-black font-orbitron font-bold text-xs py-2.5 rounded-xl uppercase tracking-wider">Rendben</button>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const bgAudio = document.getElementById('bg-audio');
+        const musicToggleBtn = document.getElementById('music-toggle-btn');
+        const musicIcon = document.getElementById('music-icon');
+        const musicText = document.getElementById('music-text');
+        let isPlaying = false;
+
+        bgAudio.volume = 0.3;
+
+        function startMusic() {
+            if (!isPlaying) {
+                bgAudio.play().then(() => {
+                    isPlaying = true;
+                    musicIcon.className = 'fa-solid fa-volume-high text-accent animate-bounce';
+                    musicText.textContent = 'Szól';
+                    musicToggleBtn.classList.add('border-accent');
+                }).catch(e => {});
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            bgAudio.play().then(() => {
+                isPlaying = true;
+                musicIcon.className = 'fa-solid fa-volume-high text-accent animate-bounce';
+                musicText.textContent = 'Szól';
+                musicToggleBtn.classList.add('border-accent');
+            }).catch(e => {
+                window.addEventListener('mousemove', startMusic, { once: true });
+                window.addEventListener('click', startMusic, { once: true });
+                window.addEventListener('keydown', startMusic, { once: true });
+                window.addEventListener('touchstart', startMusic, { once: true });
+            });
+        });
+
+        musicToggleBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                bgAudio.pause();
+                musicIcon.className = 'fa-solid fa-music text-accent';
+                musicText.textContent = 'Zene';
+                musicToggleBtn.classList.remove('border-accent');
+                isPlaying = false;
+            } else {
