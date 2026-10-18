@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaming Creator Hub</title>
+    <title>Wolf Gaming - Creator Hub</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -24,7 +24,7 @@
                             glow: 'var(--accent-glow, rgba(16, 185, 129, 0.4))'
                         },
                         darkbg: '#0a0b0e',
-                        cardbg: 'rgba(18, 20, 29, 0.75)'
+                        cardbg: 'rgba(18, 20, 29, 0.85)'
                     },
                     fontFamily: {
                         orbitron: ['Orbitron', 'sans-serif'],
@@ -45,7 +45,7 @@
         body {
             background-color: #0a0b0e;
             color: #f3f4f6;
-            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
         }
 
         .grid-bg {
@@ -69,10 +69,10 @@
         .border-accent { border-color: var(--accent-color); }
 
         .glass-panel {
-            background: rgba(15, 18, 28, 0.7);
+            background: rgba(15, 18, 28, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         ::-webkit-scrollbar { width: 8px; }
@@ -88,77 +88,132 @@
         .live-ring { animation: pulse-ring 2s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
     </style>
 </head>
-<body class="font-sans min-h-screen flex flex-col justify-between relative selection:bg-emerald-500 selection:text-black">
+<body class="min-h-screen relative flex flex-col justify-between selection:bg-emerald-500 selection:text-black">
 
-    <!-- Rejtett audió elem háttérzenéhez -->
-    <audio id="bg-audio" loop>
-        <source src="https://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/music/race-chase.ogg" type="audio/ogg">
-        A böngésződ nem támogatja az audió elemet.
-    </audio>
+    <!-- Háttérzene lejátszó -->
+    <audio id="bg-audio" loop></audio>
 
+    <!-- Háttér grid -->
     <div class="fixed inset-0 grid-bg pointer-events-none z-0"></div>
-    <div id="ambient-glow-1" class="fixed -top-40 -left-40 w-96 h-96 rounded-full blur-[120px] pointer-events-none z-0 opacity-40 transition-colors duration-500" style="background-color: var(--accent-color);"></div>
-    <div id="ambient-glow-2" class="fixed top-1/2 -right-40 w-96 h-96 rounded-full blur-[140px] pointer-events-none z-0 opacity-20 transition-colors duration-500" style="background-color: var(--accent-color);"></div>
+    <div class="fixed -top-40 -left-40 w-96 h-96 rounded-full blur-[120px] pointer-events-none z-0 opacity-30" style="background-color: var(--accent-color);"></div>
 
-    <nav class="sticky top-0 z-40 glass-panel border-b border-white/10 px-4 lg:px-8 py-3">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <!-- Felső Navigációs Sáv -->
+    <nav class="sticky top-0 z-40 glass-panel border-b border-white/10 px-6 py-3">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-accent flex items-center justify-center font-orbitron font-bold text-xl text-black shadow-lg shadow-black/50">
-                    <i class="fa-solid font-bold fa-gamepad"></i>
+                <div class="w-10 h-10 rounded-xl bg-accent flex items-center justify-center font-orbitron font-bold text-lg text-black shadow-lg">
+                    <i class="fa-solid fa-gamepad"></i>
                 </div>
-                <span id="nav-title" class="font-orbitron font-bold text-lg md:text-xl tracking-wider text-white">WOLF GAMING</span>
+                <span id="nav-title" class="font-orbitron font-bold text-lg tracking-wider text-white">WOLF GAMING</span>
             </div>
 
-            <div class="flex items-center gap-2 sm:gap-3">
-                <button id="live-status-btn" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-semibold uppercase tracking-wider">
+            <div class="flex items-center gap-3">
+                <!-- Élő adás jelző -->
+                <div id="live-status-badge" class="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-semibold uppercase">
                     <span class="relative flex h-2 w-2">
                       <span class="live-ring absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                       <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                     </span>
                     <span id="live-status-text">OFFLINE</span>
-                </button>
+                </div>
 
-                <!-- Zene Lejátszó Gomb -->
-                <button id="music-toggle-btn" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold font-rajdhani uppercase tracking-widest text-white transition-all accent-border-glow" title="Háttérzene ki/be">
+                <!-- Zene Gomb -->
+                <button id="music-toggle-btn" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold font-rajdhani uppercase tracking-widest text-white transition-all accent-border-glow">
                     <i id="music-icon" class="fa-solid fa-music text-accent"></i>
-                    <span class="hidden md:inline" id="music-text">Zene</span>
+                    <span id="music-text">Zene</span>
                 </button>
 
+                <!-- Téma Beállítása Gomb -->
                 <button id="open-customizer-btn" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold font-rajdhani uppercase tracking-widest text-white transition-all accent-border-glow">
                     <i class="fa-solid fa-sliders text-accent"></i>
-                    <span class="hidden sm:inline">Téma beállítása</span>
+                    <span>Téma</span>
                 </button>
             </div>
         </div>
     </nav>
 
-    <main class="relative z-10 max-w-6xl mx-auto px-4 py-8 md:py-12 flex-grow w-full space-y-12">
-        <section class="glass-panel rounded-3xl p-6 md:p-12 relative overflow-hidden text-center md:text-left flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+    <!-- Fő Tartalom -->
+    <main class="relative z-10 max-w-6xl mx-auto px-4 py-8 w-full space-y-8 flex-grow">
 
-            <div class="relative group">
-                <div class="absolute -inset-1 rounded-2xl blur-md opacity-75 transition duration-500 group-hover:opacity-100" style="background-color: var(--accent-color);"></div>
-                <div class="relative w-36 h-36 md:w-44 md:h-44 rounded-2xl overflow-hidden bg-slate-900 border-2 border-white/20 flex items-center justify-center">
-                    <img id="avatar-img" src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&auto=format&fit=crop&q=80" alt="Creator Avatar" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/300x300/10b981/ffffff?text=AVATAR'">
+        <!-- 1. Szekció: Profil & Fő Social Gombok -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Profil Kártya -->
+            <div class="glass-panel rounded-3xl p-6 text-center flex flex-col items-center gap-4 relative overflow-hidden shadow-xl">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+                <div class="relative w-32 h-32 rounded-2xl overflow-hidden bg-slate-900 border-2 border-white/20 shadow-lg">
+                    <img id="avatar-img" src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&auto=format&fit=crop&q=80" alt="Avatar" class="w-full h-full object-cover">
+                </div>
+                <div class="space-y-1">
+                    <h1 id="creator-name" class="font-orbitron font-black text-2xl tracking-wide uppercase text-white">WOLF GAMING</h1>
+                    <p id="creator-bio" class="text-gray-300 text-xs leading-relaxed">
+                        Üdvözöllek a csatornámon! Napi szintű livestream-ek, gaming videók és közösség.
+                    </p>
                 </div>
             </div>
 
-            <div class="flex-1 space-y-4">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/5 border border-white/10 text-xs font-mono text-gray-300">
-                    <i class="fa-solid fa-code text-accent"></i> Content Creator & Streamer
-                </div>
-                <h1 id="creator-name" class="font-orbitron font-black text-3xl md:text-5xl tracking-wide uppercase text-white">
-                    WOLF GAMING
-                </h1>
-                <p id="creator-bio" class="text-gray-300 font-sans text-base md:text-lg max-w-2xl leading-relaxed">
-                    Üdvözöllek a csatornámon! Napi szintű livestream-ek, gaming videók, versenyek és tippek. Csatlakozz a közösséghez Discordon és YouTube-on!
-                </p>
+            <!-- Jobb oldali kártyák (YouTube & Discord & Socials) -->
+            <div class="md:col-span-2 flex flex-col justify-between space-y-4">
+                
+                <!-- Nagy gombok -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <a id="link-youtube" href="https://youtube.com" target="_blank" class="glass-panel p-5 rounded-2xl border border-red-500/20 hover:border-red-500/60 flex items-center gap-4 transition-all group shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-red-600/20 border border-red-500/40 flex items-center justify-center text-red-500 text-xl group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-youtube"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron font-bold text-sm text-white group-hover:text-red-400">YouTube Csatorna</h3>
+                            <p class="text-xs text-gray-400">Videók és élők</p>
+                        </div>
+                    </a>
 
-                <div class="pt-2 flex flex-wrap justify-center md:justify-start gap-4 text-xs font-rajdhani font-bold tracking-wider">
-                    <div class="px-4 py-2 rounded-lg bg-black/40 border border-white/5 flex items-center gap-2">
-                        <i class="fa-brands fa-youtube text-red-500 text-base"></i>
-                        <span id="stat-subscribers">50K+ Feliratkozó</span>
+                    <a id="link-discord" href="https://discord.com" target="_blank" class="glass-panel p-5 rounded-2xl border border-indigo-500/20 hover:border-indigo-500/60 flex items-center gap-4 transition-all group shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-600/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400 text-xl group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-discord"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron font-bold text-sm text-white group-hover:text-indigo-300">Discord Szerver</h3>
+                            <p class="text-xs text-gray-400">Lépj be a közösségbe</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- További Social Bar -->
+                <div class="glass-panel rounded-2xl p-4 flex flex-wrap justify-around gap-2 text-xs font-semibold">
+                    <a id="link-twitch" href="https://twitch.tv" target="_blank" class="text-gray-300 hover:text-purple-400 transition-colors px-3 py-1 rounded-lg hover:bg-white/5"><i class="fa-brands fa-twitch text-purple-400"></i> Twitch</a>
+                    <a id="link-tiktok" href="https://tiktok.com" target="_blank" class="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-1 rounded-lg hover:bg-white/5"><i class="fa-brands fa-tiktok text-cyan-400"></i> TikTok</a>
+                    <a id="link-facebook" href="https://facebook.com" target="_blank" class="text-gray-300 hover:text-blue-400 transition-colors px-3 py-1 rounded-lg hover:bg-white/5"><i class="fa-brands fa-facebook text-blue-400"></i> Facebook</a>
+                    <a id="link-instagram" href="https://instagram.com" target="_blank" class="text-gray-300 hover:text-pink-400 transition-colors px-3 py-1 rounded-lg hover:bg-white/5"><i class="fa-brands fa-instagram text-pink-400"></i> Instagram</a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 2. Szekció: Videó & Menetrend -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Videó Előnézet -->
+            <div class="lg:col-span-2 space-y-3">
+                <h2 class="font-orbitron font-bold text-base text-white flex items-center gap-2">
+                    <i class="fa-solid fa-play text-accent"></i> Legújabb Videó / Stream
+                </h2>
+                <div class="glass-panel rounded-3xl p-3 shadow-2xl">
+                    <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-black">
+                        <iframe id="video-embed" class="w-full h-full border-0" 
+                                src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" 
+                                title="Featured Video" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
                     </div>
-                    <div class="px-4 py-2 rounded-lg bg-black/40 border border-white/5 flex items-center gap-2">
-                        <i class="fa-brands fa-discord text-indigo-400 text-base"></i>
-                        <span id="stat-discord">12
+                </div>
+            </div>
+
+            <!-- Menetrend -->
+            <div class="space-y-3">
+                <h2 class="font-orbitron font-bold text-base text-white flex items-center gap-2">
+                    <i class="fa-solid fa-calendar-days text-accent"></i> Stream Menetrend
+                </h2>
+                <div class="glass-panel rounded-3xl p-6 space-y-4 shadow-xl">
+                    <div class="border-b border-white/10 pb-3">
