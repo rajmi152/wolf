@@ -38,7 +38,7 @@
 
     <style>
         :root {
-            --accent-color: #ef4444; /* Fix Piros szín */
+            --accent-color: #ef4444;
             --accent-glow: rgba(239, 68, 68, 0.4);
         }
 
@@ -90,9 +90,9 @@
 </head>
 <body class="min-h-screen relative flex flex-col justify-between selection:bg-red-500 selection:text-black">
 
-    <!-- Fix Háttérzene Lejátszó (A te feltöltött zenedre mutat) -->
-    <audio id="bg-audio" loop>
-        <source src="https://rajmi152.github.io/wolf/Tor%C3%B6m%20a%20l%C3%A1ncot.mp3" type="audio/mp3">
+    <!-- Zenelejátszó közvetlenül a zene.mp3 fájlra kötve -->
+    <audio id="bg-audio" loop preload="auto">
+        <source src="zene.mp3" type="audio/mp3">
     </audio>
 
     <div class="fixed inset-0 grid-bg pointer-events-none z-0"></div>
@@ -116,13 +116,11 @@
                     <span id="live-status-text">OFFLINE</span>
                 </div>
 
-                <!-- Zene Lejátszó Gomb -->
                 <button id="music-toggle-btn" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold font-rajdhani uppercase tracking-widest text-white transition-all accent-border-glow">
                     <i id="music-icon" class="fa-solid fa-music text-accent"></i>
                     <span id="music-text">Zene</span>
                 </button>
 
-                <!-- Téma gomb (Infó ablak vagy egyszerűsített megjelenés) -->
                 <button id="open-customizer-btn" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold font-rajdhani uppercase tracking-widest text-white transition-all accent-border-glow">
                     <i class="fa-solid fa-sliders text-accent"></i>
                     <span>Téma</span>
@@ -228,20 +226,18 @@
         <p>© <span id="year"></span> <span id="footer-name">WOLF GAMING</span>. Minden jog fenntartva.</p>
     </footer>
 
-    <!-- Egyszerűsített Modál (Téma gomb tájékoztató) -->
     <div id="customizer-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
         <div class="glass-panel w-full max-w-md rounded-3xl p-6 space-y-4 border border-white/20 shadow-2xl text-center">
             <h3 class="font-orbitron font-bold text-base text-white flex items-center justify-center gap-2">
                 <i class="fa-solid fa-music text-accent"></i> Háttérzene Info
             </h3>
             <p class="text-xs text-gray-300 leading-relaxed">
-                A háttérzene sikeresen rögzítve van a rendszerben (<span class="text-accent font-bold">Töröm a láncot.mp3</span>). Csak kattints fent a <span class="text-white font-bold">Zene</span> gombra a lejátszáshoz!
+                A háttérzene csatolva van (<span class="text-accent font-bold">zene.mp3</span>). Kattints a felső <span class="text-white font-bold">Zene</span> gombra a lejátszáshoz!
             </p>
-            <button id="close-customizer-btn" class="w-full bg-accent text-black font-orbitron font-bold text-xs py-2.5 rounded-xl uppercase tracking-wider">Értem</button>
+            <button id="close-customizer-btn" class="w-full bg-accent text-black font-orbitron font-bold text-xs py-2.5 rounded-xl uppercase tracking-wider">Rendben</button>
         </div>
     </div>
 
-    <!-- Működési Script -->
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -261,31 +257,6 @@
             } else {
                 bgAudio.play().then(() => {
                     musicIcon.className = 'fa-solid fa-volume-high text-accent animate-bounce';
-                    musicText.textContent = 'Szól';
-                    musicToggleBtn.classList.add('border-accent');
-                    isPlaying = true;
-                }).catch(e => {
-                    alert('Kérlek kattints először bárhová az oldalon, vagy ellenőrizd, hogy a zene fájl fent van-e a GitHubon!');
-                });
-            }
-        });
+                    musicText.textContent =Akkor a hiba pontosan a fájlnévben lévő **ékezetek és szóközök** miatt van! A weboldalak és a böngészők (mint a Chrome vagy a Firefox) nem tudják beolvasni a hivatkozást, ha a fájlnévben szóközök meg ékezetes betűk (`ö`, `ő`, `á`) vannak.
 
-        const modal = document.getElementById('customizer-modal');
-        const openBtn = document.getElementById('open-customizer-btn');
-        const closeBtn = document.getElementById('close-customizer-btn');
-
-        openBtn.addEventListener('click', () => {
-            modal.classList.remove('hidden');
-            setTimeout(() => modal.classList.remove('opacity-0'), 10);
-        });
-
-        function closeModal() {
-            modal.classList.add('opacity-0');
-            setTimeout(() => modal.classList.add('hidden'), 300);
-        }
-
-        closeBtn.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-    </script>
-</body>
-</html>
+A megoldás rend
