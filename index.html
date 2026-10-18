@@ -90,7 +90,7 @@
 </head>
 <body class="min-h-screen relative flex flex-col justify-between selection:bg-red-500 selection:text-black">
 
-    <!-- Zenelejátszó (Hangerő: 30%) -->
+    <!-- Zenelejátszó a te MP3 daledre kötve -->
     <audio id="bg-audio" loop preload="auto">
         <source src="https://rajmi152.github.io/wolf/T%C3%B6r%C3%B6m%2520a%2520l%C3%A1ncot.mp3" type="audio/mp3">
     </audio>
@@ -136,74 +136,4 @@
                 <div class="relative w-32 h-32 rounded-2xl overflow-hidden bg-slate-900 border-2 border-white/20 shadow-lg">
                     <img id="avatar-img" src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&auto=format&fit=crop&q=80" alt="Avatar" class="w-full h-full object-cover">
                 </div>
-                <div class="space-y-1">
-                    <h1 id="creator-name" class="font-orbitron font-black text-2xl tracking-wide uppercase text-white">WOLF GAMING</h1>
-                    <p id="creator-bio" class="text-gray-300 text-xs leading-relaxed">
-                        Üdvözöllek a csatornámon! Napi szintű livestream-ek, gaming videók és közösség.
-                    </p>
-                </div>
-            </div>
-
-            <div class="md:col-span-2 flex flex-col justify-between space-y-4">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <a id="link-youtube" href="https://youtube.com" target="_blank" class="glass-panel p-5 rounded-2xl border border-red-500/20 hover:border-red-500/60 flex items-center gap-4 transition-all group shadow-lg">
-                        <div class="w-12 h-12 rounded-xl bg-red-600/20 border border-red-500/40 flex items-center justify-center text-red-500 text-xl group-hover:scale-110 transition-transform">
-                            <i class="fa-brands fa-youtube"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-orbitron font-bold text-sm text-white group-hover:text-red-400">YouTube Csatorna</h3>
-                            <p class="text-xs text-gray-400">Videók és élők</p>
-                        </div>
-                    </a>
-
-                    <a id="link-discord" href="https://discord.com" target="_blank" class="glass-panel p-5 rounded-2xl border border-indigo-500/20 hover:border-indigo-500/60 flex items-center gap-4 transition-all group shadow-lg">
-                        <div class="w-12 h-12 rounded-xl bg-indigo-600/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400 text-xl group-hover:scale-110 transition-transform">
-                            <i class="fa-brands fa-discord"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-orbitron font-bold text-sm text-white group-hover:text-indigo-300">Discord Szerver</h3>
-                            <p class="text-xs text-gray-400">Lépj be a közösségbe</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="glass-panel rounded-2xl p-4 flex flex-wrap justify-around gap-2 text-xs font-semibold">
-                    <a href="https://twitch.tv" target="_blank" class="text-gray-300 hover:text-purple-400 transition-colors px-3 py-1 rounded-lg hover:bg-white/5"><i class="fa-brands fa-twitch text-purple-400"></i> Twitch</a>
-                    <a href="https://tiktok.com" target="_blank" class="text-gray-300 hover:text-cyan-400 transition-colors px-3 py-1 rounded-lg hover:bg-white/5"><i class="fa-brands fa-tiktok text-cyan-400"></i> TikTok</a>
-                    <a href="https://facebook.com" target="_blank" class="text-gray-300 hover:text-blue-400 transition-colors px-3 py-1 rounded-lg hover:bg-white/5"><i class="fa-brands fa-facebook text-blue-400"></i> Facebook</a>
-                    <a href="https://instagram.com" target="_blank" class="text-gray-300 hover:text-pink-400 transition-colors px-3 py-1 rounded-lg hover:bg-white/5"><i class="fa-brands fa-instagram text-pink-400"></i> Instagram</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div class="lg:col-span-2 space-y-3">
-                <h2 class="font-orbitron font-bold text-base text-white flex items-center gap-2">
-                    <i class="fa-solid fa-play text-accent"></i> Legújabb Videó / Stream
-                </h2>
-                <div class="glass-panel rounded-3xl p-3 shadow-2xl">
-                    <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-black">
-                        <iframe class="w-full h-full border-0" 
-                                src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" 
-                                title="Featured Video" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-
-            <div class="space-y-3">
-                <h2 class="font-orbitron font-bold text-base text-white flex items-center gap-2">
-                    <i class="fa-solid fa-calendar-days text-accent"></i> Stream Menetrend
-                </h2>
-                <div class="glass-panel rounded-3xl p-6 space-y-4 shadow-xl">
-                    <div class="border-b border-white/10 pb-3">
-                        <div class="flex justify-between font-orbitron font-bold text-sm text-accent">
-                            <span>Hétfő - Szerda</span>
-                            <span>18:00</span>
-                        </div>
-                        <p class="text-gray-400 text-xs mt-1">GTA V Roleplay / Gaming</p>
-                    </div>
-                    <div class="border-b border-white/10 pb-3">
-                        <div class="flex justify-between font-orbitron font-bold text-
+                <div class="space-y-
