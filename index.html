@@ -92,7 +92,7 @@
 
     <!-- Zenelejátszó -->
     <audio id="bg-audio" loop preload="auto">
-        <source src="https://rajmi152.github.io/wolf/T%C3%B6r%C3%B6m%2520a%2520l%C3%A1ncot.mp3" type="audio/mp3">
+        <source src="https://rajmi152.github.io/wolf/T%C3%B6r%C3%B6m%20a%20l%C3%A1ncot.mp3" type="audio/mp3">
     </audio>
 
     <div class="fixed inset-0 grid-bg pointer-events-none z-0"></div>
@@ -124,7 +124,7 @@
 
                 <button id="open-customizer-btn" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold font-rajdhani uppercase tracking-widest text-white transition-all accent-border-glow">
                     <i class="fa-solid fa-sliders text-accent"></i>
-                    <span>Téma</span>
+                    <span>Színek</span>
                 </button>
             </div>
         </div>
@@ -233,12 +233,18 @@
     <div id="customizer-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
         <div class="glass-panel w-full max-w-md rounded-3xl p-6 space-y-4 border border-white/20 shadow-2xl text-center">
             <h3 class="font-orbitron font-bold text-base text-white flex items-center justify-center gap-2">
-                <i class="fa-solid fa-music text-accent"></i> Háttérzene Info
+                <i class="fa-solid fa-music text-accent"></i> Téma testreszabása
             </h3>
             <p class="text-xs text-gray-300 leading-relaxed">
-                A zenéd (<span class="text-accent font-bold">Töröm a láncot.mp3</span>) csatolva van és automatikusan indul!
+                Válassz kiemelőszínt az oldalhoz. A zenelejátszást a böngészők szabályai miatt az első kattintással tudod elindítani.
             </p>
-            <button id="close-customizer-btn" class="w-full bg-accent text-black font-orbitron font-bold text-xs py-2.5 rounded-xl uppercase tracking-wider">Rendben</button>
+            <div class="grid grid-cols-4 gap-3">
+                <button type="button" data-theme="#ef4444" data-glow="rgba(239,68,68,0.4)" aria-label="Piros téma" class="h-10 rounded-xl border-2 border-white/30 bg-red-500"></button>
+                <button type="button" data-theme="#3b82f6" data-glow="rgba(59,130,246,0.4)" aria-label="Kék téma" class="h-10 rounded-xl border-2 border-white/30 bg-blue-500"></button>
+                <button type="button" data-theme="#a855f7" data-glow="rgba(168,85,247,0.4)" aria-label="Lila téma" class="h-10 rounded-xl border-2 border-white/30 bg-purple-500"></button>
+                <button type="button" data-theme="#22c55e" data-glow="rgba(34,197,94,0.4)" aria-label="Zöld téma" class="h-10 rounded-xl border-2 border-white/30 bg-green-500"></button>
+            </div>
+            <button id="close-customizer-btn" class="w-full bg-accent text-black font-orbitron font-bold text-xs py-2.5 rounded-xl uppercase tracking-wider">Kész</button>
         </div>
     </div>
 
@@ -297,6 +303,21 @@
         });
 
         const modal = document.getElementById('customizer-modal');
+        const themeButtons = document.querySelectorAll('[data-theme]');
+        const savedTheme = localStorage.getItem('wolf-theme');
+        const savedGlow = localStorage.getItem('wolf-glow');
+        if (savedTheme && savedGlow) {
+            document.documentElement.style.setProperty('--accent-color', savedTheme);
+            document.documentElement.style.setProperty('--accent-glow', savedGlow);
+        }
+        themeButtons.forEach(button => button.addEventListener('click', () => {
+            const color = button.dataset.theme;
+            const glow = button.dataset.glow;
+            document.documentElement.style.setProperty('--accent-color', color);
+            document.documentElement.style.setProperty('--accent-glow', glow);
+            localStorage.setItem('wolf-theme', color);
+            localStorage.setItem('wolf-glow', glow);
+        }));
         const openBtn = document.getElementById('open-customizer-btn');
         const closeBtn = document.getElementById('close-customizer-btn');
 
@@ -315,3 +336,4 @@
     </script>
 </body>
 </html>
+
