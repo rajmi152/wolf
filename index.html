@@ -90,9 +90,9 @@
 </head>
 <body class="min-h-screen relative flex flex-col justify-between selection:bg-red-500 selection:text-black">
 
-    <!-- Zenelejátszó közvetlenül a zene.mp3 fájlra kötve -->
+    <!-- Zenelejátszó a helyesen kódolt URL-lel -->
     <audio id="bg-audio" loop preload="auto">
-        <source src="zene.mp3" type="audio/mp3">
+        <source src="T%C3%B6r%C3%B6m%2520a%2520l%C3%A1ncot.mp3" type="audio/mp3">
     </audio>
 
     <div class="fixed inset-0 grid-bg pointer-events-none z-0"></div>
@@ -232,7 +232,7 @@
                 <i class="fa-solid fa-music text-accent"></i> Háttérzene Info
             </h3>
             <p class="text-xs text-gray-300 leading-relaxed">
-                A háttérzene csatolva van (<span class="text-accent font-bold">zene.mp3</span>). Kattints a felső <span class="text-white font-bold">Zene</span> gombra a lejátszáshoz!
+                A zenéd (<span class="text-accent font-bold">Töröm a láncot.mp3</span>) sikeresen csatolva! Kattints a felső <span class="text-white font-bold">Zene</span> gombra a lejátszáshoz!
             </p>
             <button id="close-customizer-btn" class="w-full bg-accent text-black font-orbitron font-bold text-xs py-2.5 rounded-xl uppercase tracking-wider">Rendben</button>
         </div>
@@ -257,6 +257,31 @@
             } else {
                 bgAudio.play().then(() => {
                     musicIcon.className = 'fa-solid fa-volume-high text-accent animate-bounce';
-                    musicText.textContent =Akkor a hiba pontosan a fájlnévben lévő **ékezetek és szóközök** miatt van! A weboldalak és a böngészők (mint a Chrome vagy a Firefox) nem tudják beolvasni a hivatkozást, ha a fájlnévben szóközök meg ékezetes betűk (`ö`, `ő`, `á`) vannak.
+                    musicText.textContent = 'Szól';
+                    musicToggleBtn.classList.add('border-accent');
+                    isPlaying = true;
+                }).catch(e => {
+                    alert('Kérlek kattints először bárhová az oldalon, vagy ellenőrizd, hogy a Töröm a láncot.mp3 fent van-e a GitHub repódban!');
+                });
+            }
+        });
 
-A megoldás rend
+        const modal = document.getElementById('customizer-modal');
+        const openBtn = document.getElementById('open-customizer-btn');
+        const closeBtn = document.getElementById('close-customizer-btn');
+
+        openBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        });
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    </script>
+</body>
+</html>
