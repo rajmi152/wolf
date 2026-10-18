@@ -90,9 +90,9 @@
 </head>
 <body class="min-h-screen relative flex flex-col justify-between selection:bg-red-500 selection:text-black">
 
-    <!-- Zenelejátszó a helyesen kódolt URL-lel -->
+    <!-- Zenelejátszó a teljes közvetlen GitHub linkkel -->
     <audio id="bg-audio" loop preload="auto">
-        <source src="T%C3%B6r%C3%B6m%2520a%2520l%C3%A1ncot.mp3" type="audio/mp3">
+        <source src="https://rajmi152.github.io/wolf/T%C3%B6r%C3%B6m%20a%20l%C3%A1ncot.mp3" type="audio/mp3">
     </audio>
 
     <div class="fixed inset-0 grid-bg pointer-events-none z-0"></div>
@@ -232,7 +232,7 @@
                 <i class="fa-solid fa-music text-accent"></i> Háttérzene Info
             </h3>
             <p class="text-xs text-gray-300 leading-relaxed">
-                A zenéd (<span class="text-accent font-bold">Töröm a láncot.mp3</span>) sikeresen csatolva! Kattints a felső <span class="text-white font-bold">Zene</span> gombra a lejátszáshoz!
+                A zenéd (<span class="text-accent font-bold">Töröm a láncot.mp3</span>) fixen be van kötve! Kattints a felső <span class="text-white font-bold">Zene</span> gombra a lejátszáshoz.
             </p>
             <button id="close-customizer-btn" class="w-full bg-accent text-black font-orbitron font-bold text-xs py-2.5 rounded-xl uppercase tracking-wider">Rendben</button>
         </div>
@@ -261,7 +261,7 @@
                     musicToggleBtn.classList.add('border-accent');
                     isPlaying = true;
                 }).catch(e => {
-                    alert('Kérlek kattints először bárhová az oldalon, vagy ellenőrizd, hogy a Töröm a láncot.mp3 fent van-e a GitHub repódban!');
+                    alert('Hiba történt a lejátszás során. Ellenőrizd, hogy a fájl pontosan ezen a néven szerepel-e a GitHubon: Töröm a láncot.mp3');
                 });
             }
         });
