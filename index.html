@@ -90,7 +90,7 @@
 </head>
 <body class="min-h-screen relative flex flex-col justify-between selection:bg-red-500 selection:text-black">
 
-    <!-- Zenelejátszó a teljes közvetlen GitHub linkkel -->
+    <!-- Zenelejátszó (Hangerő: 30%-ra állítva, hogy ne legyen hangos) -->
     <audio id="bg-audio" loop preload="auto">
         <source src="https://rajmi152.github.io/wolf/T%C3%B6r%C3%B6m%20a%20l%C3%A1ncot.mp3" type="audio/mp3">
     </audio>
@@ -232,7 +232,7 @@
                 <i class="fa-solid fa-music text-accent"></i> Háttérzene Info
             </h3>
             <p class="text-xs text-gray-300 leading-relaxed">
-                A zenéd (<span class="text-accent font-bold">Töröm a láncot.mp3</span>) fixen be van kötve! Kattints a felső <span class="text-white font-bold">Zene</span> gombra a lejátszáshoz.
+                A zenéd (<span class="text-accent font-bold">Töröm a láncot.mp3</span>) halkítva és automata indítással be van állítva!
             </p>
             <button id="close-customizer-btn" class="w-full bg-accent text-black font-orbitron font-bold text-xs py-2.5 rounded-xl uppercase tracking-wider">Rendben</button>
         </div>
@@ -247,6 +247,35 @@
         const musicText = document.getElementById('music-text');
         let isPlaying = false;
 
+        // Hangerő beállítása 30%-ra (0.3), hogy ne legyen túl hangos
+        bgAudio.volume = 0.3;
+
+        function startMusic() {
+            if (!isPlaying) {
+                bgAudio.play().then(() => {
+                    isPlaying = true;
+                    musicIcon.className = 'fa-solid fa-volume-high text-accent animate-bounce';
+                    musicText.textContent = 'Szól';
+                    musicToggleBtn.classList.add('border-accent');
+                }).catch(e => {
+                    // Böngésző blokkolás elleni védelem
+                });
+            }
+        }
+
+        // Automatikus indítás kísérlet betöltéskor
+        window.addEventListener('DOMContentLoaded', () => {
+            bgAudio.play().then(() => {
+                isPlaying = true;
+                musicIcon.className = 'fa-solid fa-volume-high text-accent animate-bounce';
+                musicText.textContent = 'Szól';
+                musicToggleBtn.classList.add('border-accent');
+            }).catch(e => {
+                // Ha a böngésző tiltja az automata indítást hang nélkül, az első kattintásra elindul
+                document.body.addEventListener('click', startMusic, { once: true });
+            });
+        });
+
         musicToggleBtn.addEventListener('click', () => {
             if (isPlaying) {
                 bgAudio.pause();
@@ -260,8 +289,6 @@
                     musicText.textContent = 'Szól';
                     musicToggleBtn.classList.add('border-accent');
                     isPlaying = true;
-                }).catch(e => {
-                    alert('Hiba történt a lejátszás során. Ellenőrizd, hogy a fájl pontosan ezen a néven szerepel-e a GitHubon: Töröm a láncot.mp3');
                 });
             }
         });
