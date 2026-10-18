@@ -90,9 +90,9 @@
 </head>
 <body class="min-h-screen relative flex flex-col justify-between selection:bg-red-500 selection:text-black">
 
-    <!-- Zenelejátszó (Hangerő: 30%-ra állítva, hogy ne legyen hangos) -->
+    <!-- Zenelejátszó (Hangerő: 30%) -->
     <audio id="bg-audio" loop preload="auto">
-        <source src="https://rajmi152.github.io/wolf/T%C3%B6r%C3%B6m%20a%20l%C3%A1ncot.mp3" type="audio/mp3">
+        <source src="https://rajmi152.github.io/wolf/T%C3%B6r%C3%B6m%2520a%2520l%C3%A1ncot.mp3" type="audio/mp3">
     </audio>
 
     <div class="fixed inset-0 grid-bg pointer-events-none z-0"></div>
@@ -206,109 +206,4 @@
                         <p class="text-gray-400 text-xs mt-1">GTA V Roleplay / Gaming</p>
                     </div>
                     <div class="border-b border-white/10 pb-3">
-                        <div class="flex justify-between font-orbitron font-bold text-sm text-accent">
-                            <span>Péntek</span>
-                            <span>19:00</span>
-                        </div>
-                        <p class="text-gray-400 text-xs mt-1">Közösségi Est & Játékok</p>
-                    </div>
-                    <div class="p-3 rounded-xl bg-accent/10 border border-accent/20">
-                        <p class="text-xs text-gray-300 leading-relaxed">
-                            <i class="fa-solid fa-bullhorn text-accent"></i> Hamarosan indul a Discord nyereményjáték! Csatlakozz a szerverre!
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <footer class="relative z-10 border-t border-white/10 bg-black/40 py-6 text-center text-xs text-gray-500">
-        <p>© <span id="year"></span> <span id="footer-name">WOLF GAMING</span>. Minden jog fenntartva.</p>
-    </footer>
-
-    <div id="customizer-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
-        <div class="glass-panel w-full max-w-md rounded-3xl p-6 space-y-4 border border-white/20 shadow-2xl text-center">
-            <h3 class="font-orbitron font-bold text-base text-white flex items-center justify-center gap-2">
-                <i class="fa-solid fa-music text-accent"></i> Háttérzene Info
-            </h3>
-            <p class="text-xs text-gray-300 leading-relaxed">
-                A zenéd (<span class="text-accent font-bold">Töröm a láncot.mp3</span>) halkítva és automata indítással be van állítva!
-            </p>
-            <button id="close-customizer-btn" class="w-full bg-accent text-black font-orbitron font-bold text-xs py-2.5 rounded-xl uppercase tracking-wider">Rendben</button>
-        </div>
-    </div>
-
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        const bgAudio = document.getElementById('bg-audio');
-        const musicToggleBtn = document.getElementById('music-toggle-btn');
-        const musicIcon = document.getElementById('music-icon');
-        const musicText = document.getElementById('music-text');
-        let isPlaying = false;
-
-        // Hangerő beállítása 30%-ra (0.3), hogy ne legyen túl hangos
-        bgAudio.volume = 0.3;
-
-        function startMusic() {
-            if (!isPlaying) {
-                bgAudio.play().then(() => {
-                    isPlaying = true;
-                    musicIcon.className = 'fa-solid fa-volume-high text-accent animate-bounce';
-                    musicText.textContent = 'Szól';
-                    musicToggleBtn.classList.add('border-accent');
-                }).catch(e => {
-                    // Böngésző blokkolás elleni védelem
-                });
-            }
-        }
-
-        // Automatikus indítás kísérlet betöltéskor
-        window.addEventListener('DOMContentLoaded', () => {
-            bgAudio.play().then(() => {
-                isPlaying = true;
-                musicIcon.className = 'fa-solid fa-volume-high text-accent animate-bounce';
-                musicText.textContent = 'Szól';
-                musicToggleBtn.classList.add('border-accent');
-            }).catch(e => {
-                // Ha a böngésző tiltja az automata indítást hang nélkül, az első kattintásra elindul
-                document.body.addEventListener('click', startMusic, { once: true });
-            });
-        });
-
-        musicToggleBtn.addEventListener('click', () => {
-            if (isPlaying) {
-                bgAudio.pause();
-                musicIcon.className = 'fa-solid fa-music text-accent';
-                musicText.textContent = 'Zene';
-                musicToggleBtn.classList.remove('border-accent');
-                isPlaying = false;
-            } else {
-                bgAudio.play().then(() => {
-                    musicIcon.className = 'fa-solid fa-volume-high text-accent animate-bounce';
-                    musicText.textContent = 'Szól';
-                    musicToggleBtn.classList.add('border-accent');
-                    isPlaying = true;
-                });
-            }
-        });
-
-        const modal = document.getElementById('customizer-modal');
-        const openBtn = document.getElementById('open-customizer-btn');
-        const closeBtn = document.getElementById('close-customizer-btn');
-
-        openBtn.addEventListener('click', () => {
-            modal.classList.remove('hidden');
-            setTimeout(() => modal.classList.remove('opacity-0'), 10);
-        });
-
-        function closeModal() {
-            modal.classList.add('opacity-0');
-            setTimeout(() => modal.classList.add('hidden'), 300);
-        }
-
-        closeBtn.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-    </script>
-</body>
-</html>
+                        <div class="flex justify-between font-orbitron font-bold text-
