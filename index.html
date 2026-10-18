@@ -287,3 +287,31 @@
                 musicToggleBtn.classList.remove('border-accent');
                 isPlaying = false;
             } else {
+                bgAudio.play().then(() => {
+                    musicIcon.className = 'fa-solid fa-volume-high text-accent animate-bounce';
+                    musicText.textContent = 'Szól';
+                    musicToggleBtn.classList.add('border-accent');
+                    isPlaying = true;
+                });
+            }
+        });
+
+        const modal = document.getElementById('customizer-modal');
+        const openBtn = document.getElementById('open-customizer-btn');
+        const closeBtn = document.getElementById('close-customizer-btn');
+
+        openBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        });
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    </script>
+</body>
+</html>
