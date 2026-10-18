@@ -217,3 +217,135 @@
                 </h2>
                 <div class="glass-panel rounded-3xl p-6 space-y-4 shadow-xl">
                     <div class="border-b border-white/10 pb-3">
+                        <div class="flex justify-between font-orbitron font-bold text-sm text-accent">
+                            <span>Hétfő - Szerda</span>
+                            <span>18:00</span>
+                        </div>
+                        <p class="text-gray-400 text-xs mt-1">GTA V Roleplay / Gaming</p>
+                    </div>
+                    <div class="border-b border-white/10 pb-3">
+                        <div class="flex justify-between font-orbitron font-bold text-sm text-accent">
+                            <span>Péntek</span>
+                            <span>19:00</span>
+                        </div>
+                        <p class="text-gray-400 text-xs mt-1">Közösségi Est & Játékok</p>
+                    </div>
+                    <div class="p-3 rounded-xl bg-accent/10 border border-accent/20">
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            <i class="fa-solid fa-bullhorn text-accent"></i> Hamarosan indul a Discord nyereményjáték! Csatlakozz a szerverre!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-white/10 bg-black/40 py-6 text-center text-xs text-gray-500">
+        <p>© <span id="year"></span> <span id="footer-name">WOLF GAMING</span>. Minden jog fenntartva.</p>
+    </footer>
+
+    <!-- Téma Beállítása Modál -->
+    <div id="customizer-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+        <div class="glass-panel w-full max-w-lg rounded-3xl p-6 md:p-8 space-y-5 max-h-[90vh] overflow-y-auto border border-white/20 shadow-2xl">
+            <div class="flex justify-between items-center border-b border-white/10 pb-4">
+                <h3 class="font-orbitron font-bold text-lg text-white flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-accent"></i> Saját Téma Beállítása
+                </h3>
+                <button id="close-customizer-btn" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Színválasztó -->
+            <div class="space-y-2">
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300">Kiemelő Szín</label>
+                <div class="grid grid-cols-5 gap-3">
+                    <button data-color="#10b981" data-glow="rgba(16, 185, 129, 0.4)" class="color-picker-btn h-10 rounded-xl bg-emerald-500 border-2 border-white/40"></button>
+                    <button data-color="#06b6d4" data-glow="rgba(6, 182, 212, 0.4)" class="color-picker-btn h-10 rounded-xl bg-cyan-500 border-2 border-white/10"></button>
+                    <button data-color="#a855f7" data-glow="rgba(168, 85, 247, 0.4)" class="color-picker-btn h-10 rounded-xl bg-purple-500 border-2 border-white/10"></button>
+                    <button data-color="#ef4444" data-glow="rgba(239, 68, 68, 0.4)" class="color-picker-btn h-10 rounded-xl bg-red-500 border-2 border-white/10"></button>
+                    <button data-color="#f59e0b" data-glow="rgba(245, 158, 11, 0.4)" class="color-picker-btn h-10 rounded-xl bg-amber-500 border-2 border-white/10"></button>
+                </div>
+            </div>
+
+            <!-- Háttérzene Link -->
+            <div class="space-y-1.5">
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300">Háttérzene Link (MP3)</label>
+                <input type="text" id="input-music-url" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-accent" placeholder="https://...zene.mp3">
+            </div>
+
+            <!-- Élő státusz váltó -->
+            <div class="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10">
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-300">Élő Adás Státusz</span>
+                <button id="toggle-live-btn" class="px-4 py-1.5 rounded-lg bg-gray-700 text-xs font-bold text-white">OFFLINE</button>
+            </div>
+
+            <!-- Mezők -->
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1">Csatorna Név</label>
+                    <input type="text" id="input-name" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-accent">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1">Bemutatkozás</label>
+                    <textarea id="input-bio" rows="2" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-accent"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1">Avatar Kép URL</label>
+                    <input type="text" id="input-avatar" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-accent">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1">YouTube Link</label>
+                    <input type="text" id="input-yt" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-accent">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1">Discord Link</label>
+                    <input type="text" id="input-discord" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-accent">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1">YouTube Videó ID</label>
+                    <input type="text" id="input-video" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-accent" placeholder="dQw4w9WgXcQ">
+                </div>
+            </div>
+
+            <!-- Mentés Gombok -->
+            <div class="flex gap-3 pt-3 border-t border-white/10">
+                <button id="save-settings-btn" class="flex-1 bg-accent font-orbitron font-bold text-xs py-3 rounded-xl text-black uppercase tracking-wider hover:brightness-110 shadow-lg">Mentés & Alkalmazás</button>
+                <button id="reset-settings-btn" class="px-4 bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-gray-400 rounded-xl">Alaphelyzet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const defaultConfig = {
+            accentColor: '#10b981',
+            accentGlow: 'rgba(16, 185, 129, 0.4)',
+            name: 'WOLF GAMING',
+            bio: 'Üdvözöllek a csatornámon! Napi szintű livestream-ek, gaming videók és közösség.',
+            avatar: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&auto=format&fit=crop&q=80',
+            youtube: 'https://youtube.com',
+            discord: 'https://discord.com',
+            twitch: 'https://twitch.tv',
+            tiktok: 'https://tiktok.com',
+            facebook: 'https://facebook.com',
+            instagram: 'https://instagram.com',
+            videoId: 'dQw4w9WgXcQ',
+            musicUrl: '',
+            isLive: false
+        };
+
+        let currentConfig = { ...defaultConfig };
+
+        const modal = document.getElementById('customizer-modal');
+        const openBtn = document.getElementById('open-customizer-btn');
+        const closeBtn = document.getElementById('close-customizer-btn');
+        const saveBtn = document.getElementById('save-settings-btn');
+        const resetBtn = document.getElementById('reset-settings-btn');
+        const toggleLiveBtn = document.getElementById('toggle-live-btn');
+        const musicToggleBtn = document.getElementById('music-toggle-btn');
+        const bgAudio = document.getElementById('bg-audio');
+        const musicIcon = document.
