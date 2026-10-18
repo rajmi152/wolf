@@ -348,4 +348,11 @@
         const toggleLiveBtn = document.getElementById('toggle-live-btn');
         const musicToggleBtn = document.getElementById('music-toggle-btn');
         const bgAudio = document.getElementById('bg-audio');
-        const musicIcon = document.
+        const musicIcon = document.getElementById('music-icon');
+        const musicText = document.getElementById('music-text');
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        let isPlaying = false;
+
+        musicToggleBtn.addEventListener('click', ()
