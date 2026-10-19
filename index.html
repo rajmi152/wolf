@@ -109,13 +109,13 @@
             </div>
 
             <div class="flex items-center gap-3">
-                <div id="live-status-badge" class="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-semibold uppercase">
+                <a id="live-status-badge" href="https://www.youtube.com/@rajmondholosvander2110" target="_blank" rel="noopener noreferrer" title="Offline – nézd meg a YouTube-csatornát" class="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-semibold uppercase transition hover:bg-red-500/20 hover:border-red-400 hover:text-white">
                     <span class="relative flex h-2 w-2">
                       <span class="live-ring absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                       <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                     </span>
                     <span id="live-status-text">OFFLINE</span>
-                </div>
+                </a>
 
                 <button id="music-toggle-btn" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold font-rajdhani uppercase tracking-widest text-white transition-all accent-border-glow">
                     <i id="music-icon" class="fa-solid fa-music text-accent"></i>
@@ -222,7 +222,22 @@
                 </div>
             </div>
         </div>
+            <section class="glass-panel rounded-3xl p-6 shadow-xl space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <h2 class="font-orbitron font-bold text-base text-white flex items-center gap-2">
+                    <i class="fa-brands fa-tiktok text-cyan-400"></i> Legújabb TikTok videók
+                </h2>
+                <a href="https://www.tiktok.com/@wolfgaming1999" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-4 py-2 text-sm font-bold text-black shadow-lg transition hover:bg-cyan-300"><i class="fa-brands fa-tiktok"></i> TikTok megnyitása</a>
+            </div>
+            <div class="flex justify-center overflow-x-auto">
+                <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@wolfgaming1999" data-unique-id="wolfgaming1999" data-embed-type="creator" style="max-width: 720px; min-width: 288px;">
+                    <section><a target="_blank" rel="noopener noreferrer" href="https://www.tiktok.com/@wolfgaming1999?refer=creator_embed">@wolfgaming1999</a></section>
+                </blockquote>
+            </div>
+        </section>
+
     </main>
+
 
     <!-- Lábléc -->
     <footer class="relative z-10 border-t border-white/10 bg-black/40 py-6 text-center text-xs text-gray-500 w-full">
@@ -251,6 +266,88 @@
     <!-- Script -->
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+        // YouTube élő állapot ellenőrzése. GitHub Pages használatakor korlátozott API-kulcs szükséges.
+        const YOUTUBE_API_KEY = 'AIzaSyAh88io0UwolNwKYJq-F6MWwXb48pIxGCA';
+        const YOUTUBE_HANDLE = 'rajmondholosvander2110';
+        const YOUTUBE_CHANNEL_CACHE_KEY = 'wolf-youtube-channel-id';
+        const YOUTUBE_LIVE_CACHE_KEY = 'wolf-youtube-live-status';
+        const YOUTUBE_STATUS_CACHE_DURATION = 30 * 60 * 1000;
+        const liveBadge = document.getElementById('live-status-badge');
+        const liveText = document.getElementById('live-status-text');
+        const youtubeChannelUrl = `https://www.youtube.com/@${YOUTUBE_HANDLE}`;
+
+        function showLiveStatus(isLive, videoId = '') {
+            liveBadge.href = isLive && videoId
+                ? `https://www.youtube.com/watch?v=${videoId}`
+                : youtubeChannelUrl;
+            liveBadge.title = isLive ? 'Élő adás – kattints a megtekintéshez' : 'Offline – nézd meg a YouTube-csatornát';
+            liveText.textContent = isLive ? 'ÉLŐ ADÁS' : 'OFFLINE';
+            liveBadge.classList.toggle('bg-red-500/10', !isLive);
+            liveBadge.classList.toggle('border-red-500/30', !isLive);
+            liveBadge.classList.toggle('text-red-400', !isLive);
+            liveBadge.classList.toggle('bg-green-500/10', isLive);
+            liveBadge.classList.toggle('border-green-500/40', isLive);
+            liveBadge.classList.toggle('text-green-400', isLive);
+            liveBadge.querySelector('.live-ring').classList.toggle('bg-red-400', !isLive);
+            liveBadge.querySelector('.live-ring').classList.toggle('bg-green-400', isLive);
+            liveBadge.querySelector('.relative.inline-flex').classList.toggle('bg-red-500', !isLive);
+            liveBadge.querySelector('.relative.inline-flex').classList.toggle('bg-green-500', isLive);
+        }
+
+        async function checkYouTubeLiveStatus() {
+            if (!YOUTUBE_API_KEY) return;
+            const recentStatus = localStorage.getItem(YOUTUBE_LIVE_CACHE_KEY);
+            if (recentStatus) {
+                try {
+                    const cached = JSON.parse(recentStatus);
+                    if (Date.now() - cached.checkedAt < YOUTUBE_STATUS_CACHE_DURATION) {
+                        showLiveStatus(cached.isLive, cached.videoId);
+                        return;
+                    }
+                } catch (_) {}
+            }
+            try {
+                let channelId = localStorage.getItem(YOUTUBE_CHANNEL_CACHE_KEY);
+                if (!channelId) {
+                    const channelResponse = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=id&forHandle=${encodeURIComponent(YOUTUBE_HANDLE)}&key=${encodeURIComponent(YOUTUBE_API_KEY)}`, { referrerPolicy: 'unsafe-url' });
+                    if (!channelResponse.ok) throw new Error('A YouTube-csatorna lekérése nem sikerült.');
+                    const channelData = await channelResponse.json();
+                    channelId = channelData.items?.[0]?.id;
+                    if (!channelId) throw new Error('Nem található a YouTube-csatorna.');
+                    localStorage.setItem(YOUTUBE_CHANNEL_CACHE_KEY, channelId);
+                }
+                const searchUrl = new URL('https://www.googleapis.com/youtube/v3/search');
+                searchUrl.search = new URLSearchParams({
+                    part: 'snippet',
+                    channelId,
+                    eventType: 'live',
+                    type: 'video',
+                    maxResults: '1',
+                    key: YOUTUBE_API_KEY
+                });
+                const liveResponse = await fetch(searchUrl, { referrerPolicy: 'unsafe-url' });
+                if (!liveResponse.ok) throw new Error('Az élő státusz lekérése nem sikerült.');
+                const liveData = await liveResponse.json();
+                const videoId = liveData.items?.[0]?.id?.videoId || '';
+                showLiveStatus(Boolean(videoId), videoId);
+                localStorage.setItem(YOUTUBE_LIVE_CACHE_KEY, JSON.stringify({ isLive: Boolean(videoId), videoId, checkedAt: Date.now() }));
+            } catch (error) {
+                liveText.textContent = 'NEM ELÉRHETŐ';
+                liveBadge.title = 'A YouTube élő státusza most nem ellenőrizhető';
+            }
+        }
+
+        const cachedLiveStatus = localStorage.getItem(YOUTUBE_LIVE_CACHE_KEY);
+        if (cachedLiveStatus) {
+            try {
+                const cached = JSON.parse(cachedLiveStatus);
+                if (Date.now() - cached.checkedAt < YOUTUBE_STATUS_CACHE_DURATION) {
+                    showLiveStatus(cached.isLive, cached.videoId);
+                }
+            } catch (_) {}
+        }
+        checkYouTubeLiveStatus();
+        setInterval(checkYouTubeLiveStatus, YOUTUBE_STATUS_CACHE_DURATION);
 
         const bgAudio = document.getElementById('bg-audio');
         const musicToggleBtn = document.getElementById('music-toggle-btn');
@@ -334,6 +431,7 @@
         closeBtn.addEventListener('click', closeModal);
         modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
     </script>
+    <script async src="https://www.tiktok.com/embed.js"></script>
 </body>
 </html>
 
